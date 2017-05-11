@@ -4,7 +4,13 @@
   "description": "buah tangan for back",
   "main": "index.js",
   "scripts": {
-    "start":"node app.js",
+    "start": "./node_modules/pm2/bin/pm2 start app.js",
+    "poststart": "./node_modules/pm2/bin/pm2 logs",
+    "prestart": "./node_modules/.bin/sequelize db:migrate && ./node_modules/.bin/sequelize db:seed --seed seeders/20170510114359-product-seeder.js
+                 && ./node_modules/.bin/sequelize db:seed --seed seeders/20170510132708-product-city-seeder.js
+                 && ./node_modules/.bin/sequelize db:seed --seed seeders/20170510132656-product-category-seeder.js
+                 && ./node_modules/.bin/sequelize db:seed --seed seeders/20170510135511-city_seeder.js
+                 && ./node_modules/.bin/sequelize db:seed --seed seeders/20170510135520-category_seeder.js",
     "dev": "nodemon app.js",
     "test": "NODE_ENV=test mocha"
   },
@@ -29,6 +35,7 @@
     "mocha": "^3.3.0",
     "pd": "^0.8.1",
     "pg": "^6.1.5",
+    "pm2": "^2.4.6",
     "sequelize": "^3.30.4"
   },
   "devDependencies": {
