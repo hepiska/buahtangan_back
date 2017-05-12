@@ -1,7 +1,7 @@
 const model = require('../models');
 
 module.exports = {
-  views: (req, res) => {
+  viewByCityCategory: (req, res) => {
     let city = '';
     if (req.params.city_name === 'all') {
       city = '';

@@ -34,7 +34,7 @@ passport.use(new LocalStrategy({
     }
 ));
 
-router.get('/products/:city_name/:category', ProductController.views);
+router.get('/products/:city_name/:category', ProductController.viewByCityCategory);
 router.get('/featured/:city', ProductController.getFeaturedProduct);
 router.post('/user/register', UserController.register);
 router.post('/products', ProductController.createProduct);
