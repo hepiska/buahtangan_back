@@ -30,5 +30,96 @@ module.exports = {
       }).catch((err) => {
         res.send(err);
       });
+  },
+  getFeaturedProduct: (req, res) => {
+    let city = '';
+    if (req.params.city === 'all') {
+      city = '';
+    } else {
+      city = req.params.city_name;
+      city = city.split('_');
+      city = city.join(' ').toLowerCase();
+    }
+    model.sequelize.query(`select DISTINCT products.id as id, products.name as name, products.image_url as image_url, products.desc as desc, cities.name as city_name, products.featured as featured
+          from public."Products" products left join public."Product_cities"  product_cities on(products.id=product_cities.product_id)
+          left join public."Cities" cities on (product_cities.city_id=cities.id)
+          where cities.name ilike '%${city}%' and products.featured=true`
+      , {
+        type: model.sequelize.QueryTypes.SELECT
+      }).then((questions) => {
+        res.send(questions)
+      }).catch((err) => { res.send(err); });
+  },
+  createProduct: (req, res) => {
+    model.Product.create({
+      name: req.body.name,
+      image_url: req.body.image_url,
+      desc: req.body.desc,
+      price: req.body.price,
+      featured: req.body.featured
+    }).then((dataproduct) => {
+      model.Category.findOne({
+        where: { name: req.body.category }
+      }).then((datacategory) => {
+        model.Product_category.create({
+          product_id: dataproduct.id,
+          category_id: datacategory.id
+        });
+      });
+      model.City.findOne({
+        where:
+        { name: req.body.city }
+      }).then((dataCity) => {
+        model.Product_city.create({
+          product_id: dataproduct.id,
+          city_id: dataCity.id
+        }).then(() => {
+          res.send('input data sucsess')
+        });
+      });
+    });
+  },
+  delete: (req, res) => {
+    model.Product.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then((dataproduct) => {
+      model.Product_city.destroy({
+        where: {
+          product_id: req.params.id
+        }
+      }).then(() => {
+        model.Product_category.destroy({
+          where: {
+            product_id: req.params.id
+          }
+        }).then(() => {
+          res.send('data deleted');
+        });
+      });
+    });
+  },
+  update: (req, res) => {
+    model.Product.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then((data) => {
+      model.Product.update({
+        name: req.body.name || data.name,
+        image_url: req.body.image_url || data.image_url,
+        featured: req.body.featured || data.featured,
+        desc: req.body.desc || data.desc
+      }, {
+        where: {
+          id: req.params.id
+        }
+      }).then(() => {
+        const output = { massage: 'data updated'};
+        res.send(output);
+      });
+    });
   }
 };

@@ -4,7 +4,7 @@
   "description": "buah tangan for back",
   "main": "index.js",
   "scripts": {
-    "start":"node app.js",
+    "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "NODE_ENV=test mocha"
   },
@@ -26,10 +26,14 @@
     "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
     "express": "^4.15.2",
+    "jsonwebtoken": "^7.4.0",
     "mocha": "^3.3.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "pd": "^0.8.1",
     "pg": "^6.1.5",
-    "sequelize": "^3.30.4"
+    "sequelize": "^3.30.4",
+    "short-id": "^0.1.0-1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",

@@ -3,10 +3,40 @@ module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     name: DataTypes.STRING,
     phone: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+        isEmail: true,
+      }
+    },
     profil_picture_url: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING
+    username: {
+        type: DataTypes.STRING,
+        validate: {
+          isuniq: (value, next) => {
+            User.find({
+              where: {
+                username: value
+              }
+            }).then((user) => {
+              if (user) {
+                next('already taken')
+              } else {
+                next()
+              }
+            })
+          }
+        }
+    },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    salt: DataTypes.STRING,
+    role: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
