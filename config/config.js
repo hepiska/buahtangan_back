@@ -11,14 +11,14 @@ module.exports = {
   "test": {
     "username": "ego",
     "password": "ego",
-    "database": "buahtangan_test",
+    "database": "buahtangan",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": process.env.RDS_USERNAME || '',
     "password": process.env.RDS_PASSWORD || '',
-    "database": process.env.RDS_DB_NAME || 'bukalelang-db',
+    "database": process.env.RDS_DB_NAME || '',
     "host": process.env.RDS_HOSTNAME || '',
     "port": process.env.RDS_PORT || '5432',
     "dialect": "postgres",

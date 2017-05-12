@@ -1,3 +1,10 @@
-let data = require('./data/readFile');
+// let data = require('./data/readFile');
+//
+// console.log(data.products());
+const fs = require('fs');
 
-console.log(data.products());
+const readFile = fs.readFileSync('data/Yogyakarta.json').toString();
+const dataPlaceJson = JSON.parse(readFile);
+console.log(dataPlaceJson);
+
+console.log(dataPlaceJson);
