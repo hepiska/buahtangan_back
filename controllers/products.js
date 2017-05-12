@@ -17,7 +17,7 @@ module.exports = {
     } else {
       category = req.params.category.toLowerCase();
     }
-    model.sequelize.query(`select products.id as id, products.name as name, products.image_url as image_url, products.desc as desc, cities.name as city_name, categories.name as category_name
+    model.sequelize.query(`select products.id as id, products.name as name,products.price as price, products.image_url as image_url, products.desc as desc, cities.name as city_name, categories.name as category_name
           from public."Products" products left join public."Product_cities"  product_cities on(products.id=product_cities.product_id)
           left join public."Cities" cities on (product_cities.city_id=cities.id)
           left join public."Product_categories" product_categories on(product_categories.product_id=products.id)
@@ -40,7 +40,7 @@ module.exports = {
       city = city.split('_');
       city = city.join(' ').toLowerCase();
     }
-    model.sequelize.query(`select DISTINCT products.id as id, products.name as name, products.image_url as image_url, products.desc as desc, cities.name as city_name, products.featured as featured
+    model.sequelize.query(`select DISTINCT products.id as id, products.name as name, products.price as price, products.image_url as image_url, products.desc as desc, cities.name as city_name, products.featured as featured
           from public."Products" products left join public."Product_cities"  product_cities on(products.id=product_cities.product_id)
           left join public."Cities" cities on (product_cities.city_id=cities.id)
           where cities.name ilike '%${city}%' and products.featured=true`
