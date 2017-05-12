@@ -36,18 +36,18 @@ passport.use(new LocalStrategy({
 
 router.get('/products/:city_name/:category', ProductController.views);
 router.get('/featured/:city', ProductController.getFeaturedProduct);
-router.post('/user/register', UserController.register);
 router.post('/products', ProductController.createProduct);
 router.delete('/products/:id', ProductController.delete);
 router.put('/products/:id', ProductController.update);
+router.post('/user/register', UserController.register);
+router.post('/user/fblogin', UserController.fbLogin);
 router.post('/login',passport.authenticate('local', { session: false }), (req, res) => {
   const user = res.req.user;
   const token = jwt.sign({
     userid: user.id,
     name: user.name,
     username: user.username,
-    email: user.email,
-    facebook_id: user.facebook_id
+    email: user.email
   }, process.env.RAHASIA, { expiresIn: 24 * 60 * 60 });
   const sentUser = { id: user.id, name: user.name, profilpicture: user.profil_picture_url }
   res.send({ sentUser, token });

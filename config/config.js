@@ -13,7 +13,8 @@ module.exports = {
     "password": "ego",
     "database": "buahtangan",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging":false
   },
   "production": {
     "username": process.env.RDS_USERNAME || '',
