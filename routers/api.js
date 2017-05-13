@@ -42,8 +42,8 @@ router.get('/featured/:city', ProductController.getFeaturedProduct);
 router.post('/products', ProductController.createProduct);
 router.delete('/products/:id', ProductController.delete);
 router.put('/products/:id', ProductController.update);
-router.post('/user/register', UserController.register);
-router.post('/user/fblogin', UserController.fbLogin);
+router.post('/register', UserController.register);
+router.post('/fblogin', UserController.fbLogin);
 router.post('/checkout', CartController.checkout);
 router.post('/login',passport.authenticate('local', { session: false }), (req, res) => {
   const user = res.req.user;
