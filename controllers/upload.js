@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk')
-const fs = require('fs');
+
 require('dotenv').config();
 const generateID = require('unique-id-generator');
 
@@ -8,17 +8,20 @@ AWS.config
 
 module.exports = {
   upload: (req, res) => {
-    const base64data = new Buffer(req.body.data.replace(/^data:image\/w+;base64,/, ''), 'base64');
+    let data1 = req.body.data.replace(/^data:image\/\w+;base64,/, '')
+    const base64data = new Buffer(data1, 'base64');
     const params = { Bucket: 'buahtangandata',
       Key: `${generateID({ prefix: `${req.body.name}` })}`,
-      Body: base64data
+      Body: base64data,
+      ContentType: 'image/.jpg',
+      ACL: 'public-read'
     };
-    const s3 = AWS.S3();
+    const s3 = new AWS.S3();
     s3.upload(params, (err, data) => {
       if (err) {
         res.send(err);
       } else {
-        res.send({ url: data.Location });
+        res.send(data);
       }
     });
   }
