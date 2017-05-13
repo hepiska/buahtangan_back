@@ -8,6 +8,7 @@ const model = require('../models');
 const ProductController = require('../controllers/products');
 const UserController = require('../controllers/users');
 const CartController = require('../controllers/cart');
+const Upload = require('../controllers/upload');
 
 const router = express.Router();
 
@@ -45,6 +46,7 @@ router.put('/products/:id', ProductController.update);
 router.post('/register', UserController.register);
 router.post('/fblogin', UserController.fbLogin);
 router.post('/checkout', CartController.checkout);
+router.post('/upload', Upload.upload)
 router.post('/login',passport.authenticate('local', { session: false }), (req, res) => {
   const user = res.req.user;
   const token = jwt.sign({
