@@ -1,10 +1,6 @@
 node_modules
-<<<<<<< HEAD
 .env
-
-# Elastic Beanstalk Files
+.gitignore
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
-=======
->>>>>>> 1f6126ec06f31708f9b4d9add3f391cd2c573ce4
