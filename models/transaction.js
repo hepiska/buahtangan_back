@@ -2,6 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Transaction = sequelize.define('Transaction', {
     user_id: DataTypes.INTEGER,
+    transaction_id:DataTypes.STRING,
     status: DataTypes.STRING
   }, {
     classMethods: {

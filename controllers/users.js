@@ -33,7 +33,7 @@ module.exports = {
       if (data) {
         const user = data;
         const token = jwt.sign({
-          userid: user.id,
+          id: user.id,
           name: user.name,
           username: user.username,
           email: user.email,
@@ -54,7 +54,7 @@ module.exports = {
         }).then((data2) => {
           const user = data2;
           const token = jwt.sign({
-            userid: user.id,
+            id: user.id,
             name: user.name,
             username: user.username,
             email: user.email,

@@ -83,7 +83,6 @@ describe('login fb', () => {
       } else {
         res.should.have.status(200);
         res.body.should.have.property('token');
-        console.log('---------',res.body);
         res.body.should.have.property('sendUser');
         done()
       }
