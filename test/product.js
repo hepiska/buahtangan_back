@@ -5,8 +5,9 @@ const model = require('../models');
 const chaiHttp = require('chai-http');
 const server = require('../app.js');
 const productController = require('../controllers/products')
-
+chai.use(chaiHttp);
 describe('Product', () => {
+
   it('sucsess createProduct', (done) => {
     chai.request(server)
     .post('/api/products')
@@ -45,7 +46,31 @@ describe('Product', () => {
        res.body.massage.should.to.equal('data updated');
       done()
     });
-  })
+  });
+  it('get product', (done) => {
+    chai.request(server)
+    .get('/api/products/jakarta/food')
+    .send({
+    })
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.body[0].should.have.property('id');
+      res.body[0].should.have.property('name');
+      res.body[0].should.have.property('price');
+      res.body[0].should.have.property('city_name');
+      done()
+    });
+  });
+  it('get product fail', (done) => {
+    chai.request(server)
+    .get('/api/products/jakarta/acces')
+    .send({
+    })
+    .end((err, res) => {
+      res.body.length.should.equal(0)
+      done()
+    });
+  });
 
   afterEach((done) => {
     model.Product.destroy({

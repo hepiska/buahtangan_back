@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(cors());
 app.use('/api', api);
 
-const server = app.listen(process.env.PORT, function () {
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, () => {
   console.log(`Server Jalan di port ${process.env.PORT}`);
 });
 
