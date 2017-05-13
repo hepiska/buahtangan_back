@@ -19,7 +19,7 @@ module.exports = {
       if (err) {
         res.send(err);
       } else {
-        res.send({ url: data.Location });
+        res.send(data);
       }
     });
   }
