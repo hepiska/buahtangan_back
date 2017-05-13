@@ -6,7 +6,7 @@ AWS.config
 
 module.exports = {
   upload: (req, res) => {
-    const params = { Bucket: 'buahtangandata', Key: `${req.body.name}_${new Date()}`, Body: req.body.data };
+    const params = { Bucket: 'buahtangandata', Key: `${req.body.name}_${new Date()}.jpg`, Body: req.body.data };
     const s3 = new AWS.S3();
     s3.upload(params, (err, data) => {
       if (err) {
