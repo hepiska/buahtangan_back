@@ -25,8 +25,8 @@ module.exports = {
           where cities.name ilike '%${city}%' and categories.name Ilike '%${category}%'`
       , {
         type: model.sequelize.QueryTypes.SELECT
-      }).then((questions) => {
-        res.send(questions);
+      }).then((products) => {
+        res.send(products);
       }).catch((err) => {
         res.send(err);
       });
@@ -74,7 +74,7 @@ module.exports = {
           product_id: dataproduct.id,
           city_id: dataCity.id
         }).then(() => {
-          res.send('input data sucsess')
+          res.send({ massage:'input data sucsess' })
         });
       });
     });
