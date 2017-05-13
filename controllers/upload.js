@@ -8,6 +8,7 @@ AWS.config
 
 module.exports = {
   upload: (req, res) => {
+    console.log(req.body.data);
     const base64data = new Buffer(req.body.data, 'binary');
     const params = { Bucket: 'buahtangandata', Key: `${generateID({ prefix: `${req.body.name}` })}.jpg`, Body: base64data };
     const s3 = new AWS.S3();
