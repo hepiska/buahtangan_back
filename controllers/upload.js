@@ -9,14 +9,18 @@ AWS.config
 module.exports = {
   upload: (req, res) => {
     const base64data = new Buffer(req.body.data, 'binary');
-    const params = { Bucket: 'buahtangandata', Key: `${generateID({ prefix: `${req.body.name}` })}.jpg`, Body: base64data };
-    const s3 = new AWS.S3();
-    s3.upload(params, (err, data) => {
-      if (err) {
-        res.send(err)
-      } else {
-        res.send({ url: data.Location });
-      }
-    });
+    const params = { Bucket: 'buahtangandata',
+      Key: `${generateID({ prefix: `${req.body.name}` })}.jpg`,
+      Body: base64data
+    };
+    const upload = new AWS.S3.ManagedUpload({ params: params});
+    upload.send((err, data) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send({ url: data.Location })
+    }
+  });
+
   }
 };
