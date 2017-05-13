@@ -1,7 +1,7 @@
 const model = require('../models');
 
 module.exports = {
-  views: (req, res) => {
+  viewByCityCategory: (req, res) => {
     let city = '';
     if (req.params.city_name === 'all') {
       city = '';
@@ -40,7 +40,7 @@ module.exports = {
       city = city.split('_');
       city = city.join(' ').toLowerCase();
     }
-    model.sequelize.query(`select DISTINCT products.id as id, products.name as name, products.image_url as image_url, products.desc as desc, cities.name as city_name, products.featured as featured
+    model.sequelize.query(`select DISTINCT products.id as id, products.name as name, products.price as price, products.image_url as image_url, products.desc as desc, cities.name as city_name, products.featured as featured
           from public."Products" products left join public."Product_cities"  product_cities on(products.id=product_cities.product_id)
           left join public."Cities" cities on (product_cities.city_id=cities.id)
           where cities.name ilike '%${city}%' and products.featured=true`
