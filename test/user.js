@@ -10,7 +10,7 @@ let serverHost = app;
 
 describe ('register login', () => {
   it('should have failed', (done) => {
-    chai.request(serverHost).post('/api/user/register')
+    chai.request(serverHost).post('/api/register')
     .send({
       name: 'lalala',
       email: 'lalala@mail.com',
@@ -33,7 +33,7 @@ describe ('register login', () => {
 
 
   it('should have succes', (done) => {
-    chai.request(serverHost).post('/api/user/register')
+    chai.request(serverHost).post('/api/register')
     .send({
       name: 'lalala',
       email: 'lalala@mail.com',
@@ -69,7 +69,7 @@ describe ('register login', () => {
 
 describe('login fb', () => {
   it('already have account', () => {
-    chai.request(serverHost).post('/api/user/fblogin')
+    chai.request(serverHost).post('/api/fblogin')
     .send({
       name: 'lalala',
       email: 'lalala@mail.com',
@@ -91,7 +91,7 @@ describe('login fb', () => {
   });
 
   it('dont have account', () => {
-    chai.request(serverHost).post('/api/user/fblogin')
+    chai.request(serverHost).post('/api/fblogin')
     .send({
       name: 'sumarni',
       email: 'sumarni@mail.com',
