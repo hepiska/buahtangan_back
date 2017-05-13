@@ -117,7 +117,7 @@ module.exports = {
           id: req.params.id
         }
       }).then(() => {
-        const output = { massage: 'data updated'};
+        const output = { massage: 'data updated' };
         res.send(output);
       });
     });

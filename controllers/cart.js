@@ -24,8 +24,8 @@ module.exports = {
           user_id: user.id,
           transaction_id,
           status: 'unpaid'
-        }).then(() => {
-            res.send({ massage: 'checkout succses', transaction_id })
+        }).then((data) => {
+            res.send({ massage: 'checkout succses', data })
         });
       }
     });

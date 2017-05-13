@@ -8,6 +8,8 @@ const model = require('../models');
 const ProductController = require('../controllers/products');
 const UserController = require('../controllers/users');
 const CartController = require('../controllers/cart');
+const TransactionConttroller = require('../controllers/transaction');
+const PlaceConttroller = require('../controllers/place');
 const Upload = require('../controllers/upload');
 
 const router = express.Router();
@@ -46,7 +48,10 @@ router.put('/products/:id', ProductController.update);
 router.post('/register', UserController.register);
 router.post('/fblogin', UserController.fbLogin);
 router.post('/checkout', CartController.checkout);
-router.post('/upload', Upload.upload)
+router.post('/upload', Upload.upload);
+router.get('/transaction', TransactionConttroller.views);
+router.put('/transaction/:id', TransactionConttroller.update);
+router.get('/place/:city_name', PlaceConttroller.viewsByCity);
 router.post('/login',passport.authenticate('local', { session: false }), (req, res) => {
   const user = res.req.user;
   const token = jwt.sign({
