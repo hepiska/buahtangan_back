@@ -12,7 +12,9 @@ module.exports = {
     const base64data = new Buffer(data1, 'base64');
     const params = { Bucket: 'buahtangandata',
       Key: `${generateID({ prefix: `${req.body.name}` })}`,
-      Body: base64data
+      Body: base64data,
+      ContentType: 'image/.jpg',
+      ACL: 'public-read'
     };
     const s3 = new AWS.S3();
     s3.upload(params, (err, data) => {
