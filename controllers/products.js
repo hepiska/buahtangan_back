@@ -55,6 +55,7 @@ module.exports = {
       name: req.body.name,
       image_url: req.body.image_url,
       desc: req.body.desc,
+      rating: 0,
       price: req.body.price,
       featured: req.body.featured
     }).then((dataproduct) => {
@@ -77,6 +78,8 @@ module.exports = {
           res.send({ massage:'input data sucsess' })
         });
       });
+    }).catch((err) => {
+      res.send(err);
     });
   },
   delete: (req, res) => {
