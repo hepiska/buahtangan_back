@@ -1,4 +1,5 @@
 const model = require('../models');
+const mail = require('../helper/mail')
 
 module.exports = {
   views: (req, res) => {
@@ -15,7 +16,21 @@ module.exports = {
         where: {
           id: req.params.id
         }
-      }).then(() => {
+      }).then((data) => {
+        model.Transaction.findOne({
+          where: {
+            id: data
+          }
+        }).then((dataTran) => {
+          model.User.find({
+            where: {
+              id: dataTran.user_id
+            }
+          }).then((dataUser) => {
+            console.log(dataUser);
+            console.log(mail.sendTransactionStatus(dataUser.email, dataTran.transaction_id, dataTran.status));
+          })
+        })
         res.send({ massage: 'data updated' })
       });
   }
