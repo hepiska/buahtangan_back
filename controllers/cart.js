@@ -2,6 +2,7 @@ const model = require('../models');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const generateID = require('unique-id-generator');
+const mail = require('../helper/mail');
 
 module.exports = {
   checkout: (req, res) => {
@@ -25,7 +26,8 @@ module.exports = {
           transaction_id,
           status: 'unpaid'
         }).then((data) => {
-            res.send({ massage: 'checkout succses', data })
+          mail.sendTransactionSumaary(user.email, transaction_id)
+          res.send({ massage: 'checkout succses', data })
         });
       }
     });

@@ -3,7 +3,7 @@ const mocha = require('mocha');
 const should =  chai.should();
 const model = require('../models');
 const chaiHttp = require('chai-http');
-const server = require('../app.js');
+const server = require('../app.js').server;
 const productController = require('../controllers/products')
 chai.use(chaiHttp);
 describe('Product', () => {
@@ -96,4 +96,41 @@ describe('Product', () => {
     })
     done();
   });
+})
+
+describe('featured product', () => {
+  it('succes get ', (done) => {
+    chai.request(server)
+    .get('/api/featured/jakarta')
+    .send({
+    })
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.body[0].should.have.property('name')
+      res.body[0].should.have.property('price')
+      res.body[0].should.have.property('image_url')
+      done()
+    });
+  });
+  it('succes get ', (done) => {
+    chai.request(server)
+    .get('/api/featured/bandung')
+    .send({
+    })
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.body.length.should.equal(0)
+      done()
+    });
+  })
+  it('succes wronng url ', (done) => {
+    chai.request(server)
+    .get('/api/featured/bandung/sa')
+    .send({
+    })
+    .end((err, res) => {
+      res.should.have.status(404);
+      done()
+    });
+  })
 })

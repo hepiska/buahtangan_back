@@ -10,6 +10,7 @@ Backend for BuahTangan
 | api/checkout | POST | Checkout Transaction | token, cartItems |{massage,transaction_id}| 
 | api/login | POST | Login | username, password |{sendUser:{id,name,profilpicture},token}| 
 | api/register | POST | Register | username, email, password, photo |{massage}|
+
 | api/transaction | GET | Menampilkan Data Transaksi | - |{transactionId, username, user_id, status}| 
 | api/transaction | PUT | Mengedit Transaksi | transactionId, user_id, status | |
 | api/fblogin|POST|-|name.username,email,profil_picture_url|{sendUser:{id,name,profilpicture},token}|
@@ -18,3 +19,4 @@ Backend for BuahTangan
 | api/products/:id|PUT|create product for seller|name/price/image_url/desc/featured|massage| 
 | api/upload|POST|create product for seller|name,data(base64)|url| 
 | api/place/city_name|GET|get place base on city|-|[{}]|
+

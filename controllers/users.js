@@ -3,6 +3,7 @@ const shortid = require('short-id');
 require('dotenv').config();
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
+const mail = require('../helper/mail');
 
 module.exports = {
   register: (req, res) => {
@@ -17,9 +18,11 @@ module.exports = {
       username: req.body.username,
       password: crypto.createHmac('sha256', salt)
           .update(req.body.password).digest('hex')
-    }).then(() => {
+    }).then((data) => {
+      mail.sendPromo(data.email);
       res.send({ massage: 'register success' });
-    }).catch((err) => {
+    })
+    .catch((err) => {
       res.send(err);
     });
   },
