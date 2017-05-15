@@ -19,7 +19,8 @@ module.exports = {
           .update(req.body.password).digest('hex')
     }).then(() => {
       res.send({ massage: 'register success' });
-    }).catch((err) => {
+    })
+    .catch((err) => {
       res.send(err);
     });
   },

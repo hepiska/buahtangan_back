@@ -3,7 +3,7 @@ const mocha = require('mocha');
 const should =  chai.should();
 const model = require('../models');
 const chaiHttp = require('chai-http');
-const server = require('../app.js');
+const server = require('../app.js').server;
 
 describe('checkout',() => {
   const cartItem = [
@@ -53,7 +53,6 @@ describe('checkout',() => {
       cartItem
     }).end((errcheckout, rescheckout) => {
       if (errcheckout) {
-        console.log(errcheckout);
         done()
       } else {
         rescheckout.body.message.should.equal('jwt must be provided');
@@ -68,7 +67,6 @@ describe('checkout',() => {
       cartItem
     }).end((errcheckout, rescheckout) => {
       if (errcheckout) {
-        console.log(errcheckout);
         done()
       } else {
         rescheckout.body.message.should.equal('invalid token');

@@ -1,6 +1,6 @@
 var chai = require('chai')
 var chaiHttp = require('chai-http')
-let app = require('../app')
+let app = require('../app').server
 
 var should = chai.should()
 chai.use(chaiHttp)
@@ -101,11 +101,9 @@ describe('login fb', () => {
     })
     .end((err, res) => {
       if (err) {
-        console.log('-------',err);
         done();
       } else {
         res.should.have.status(200);
-        console.log('--------', res);
         res.body.should.have.property('token');
         res.body.should.have.property('sendUser');
         done();
