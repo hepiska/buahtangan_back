@@ -3,7 +3,7 @@ const mocha = require('mocha');
 const should =  chai.should();
 const model = require('../models');
 const chaiHttp = require('chai-http');
-const server = require('../app.js');
+const server = require('../app.js').server;
 
 describe('get data', (done) => {
   it('success', (done) => {

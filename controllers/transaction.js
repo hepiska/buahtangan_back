@@ -1,5 +1,6 @@
 const model = require('../models');
-const mail = require('../helper/mail')
+const mail = require('../helper/mail');
+
 
 module.exports = {
   views: (req, res) => {
@@ -27,8 +28,8 @@ module.exports = {
               id: dataTran.user_id
             }
           }).then((dataUser) => {
-            console.log(dataUser);
-            console.log(mail.sendTransactionStatus(dataUser.email, dataTran.transaction_id, dataTran.status));
+            mail.sendTransactionStatus(dataUser.email,
+            dataTran.transaction_id, dataTran.status);
           })
         })
         res.send({ massage: 'data updated' })

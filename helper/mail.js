@@ -79,7 +79,6 @@ module.exports = {
 
   sendTransactionStatus : (recivedEmail, transactionId, status) => {
     let to = [recivedEmail];
-    console.log(to);
     const params = {
       Source: 'buahtanganmail@gmail.com',
       Destination: { ToAddresses: to },

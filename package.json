@@ -36,6 +36,7 @@
     "pg": "^6.1.5",
     "sequelize": "^3.30.4",
     "short-id": "^0.1.0-1",
+    "socket.io": "^2.0.1",
     "unique-id-generator": "^1.0.1"
   },
   "devDependencies": {
