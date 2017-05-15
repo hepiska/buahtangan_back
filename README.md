@@ -18,3 +18,4 @@ Backend for BuahTangan
 | api/products/:id|put|create product for seller|name/price/image_url/desc/featured|massage|
 | api/upload|post|create product for seller|name,data(base64)|url|
 | api/place/city_name|get|get place base on city|-|[{}]|
+| api/transactionUser | post | get user transaction history | token | [{transaction}] 
