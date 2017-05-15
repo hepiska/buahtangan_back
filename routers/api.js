@@ -41,7 +41,7 @@ passport.use(new LocalStrategy({
 
 
 router.get('/products/:city_name/:category', ProductController.viewByCityCategory);
-router.get('/featured/:city', ProductController.getFeaturedProduct);
+router.get('/featured/:city_name', ProductController.getFeaturedProduct);
 router.post('/products', ProductController.createProduct);
 router.delete('/products/:id', ProductController.delete);
 router.put('/products/:id', ProductController.update);
