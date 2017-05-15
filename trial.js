@@ -1,3 +1,6 @@
-const mail = require('./helper/mail')
+const fs = require('fs');
 
-mail.sendEmail('ego1403@gmail.com', 'buahtangan1');
+let data = fs.readFileSync('./data/longweekend.json').toString();
+const dataPlaceJson = JSON.parse(data);
+
+console.log(data);

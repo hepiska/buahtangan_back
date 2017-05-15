@@ -12,7 +12,7 @@ describe('checkout',() => {
     { id: 3, name: 'bakpia' }
   ];
   it('success', (done) => {
-    chai.request(server).post('/api/user/fblogin')
+    chai.request(server).post('/api/fblogin')
     .send({
       name: 'lalala',
       email: 'lalala@mail.com',
@@ -34,7 +34,7 @@ describe('checkout',() => {
             done()
           } else {
             rescheckout.body.should.have.property('massage');
-            rescheckout.body.should.have.property('transaction_id')
+            rescheckout.body.data.should.have.property('transaction_id')
             model.Cart.findAll({})
             .then((data) => {
               data.length.should.equal(3)
@@ -82,7 +82,15 @@ describe('checkout',() => {
         }
       }
     }).then(() => {
-      done()
+      model.Transaction.destroy({
+        where: {
+          id: {
+            $gt: 1
+          }
+        }
+      }).then(() => {
+        done()
+      })
     });
   });
 });
