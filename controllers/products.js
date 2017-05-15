@@ -32,7 +32,6 @@ module.exports = {
       });
   },
   getFeaturedProduct: (req, res) => {
-    console.log(req.params.city_name);
     let city = '';
     if (req.params.city === 'all') {
       city = '';
