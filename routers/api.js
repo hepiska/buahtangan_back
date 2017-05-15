@@ -50,6 +50,7 @@ router.post('/fblogin', UserController.fbLogin);
 router.post('/checkout', CartController.checkout);
 router.post('/upload', Upload.upload);
 router.get('/transaction', TransactionConttroller.views);
+router.post('/transactionUser', TransactionConttroller.viewBuyer);
 router.put('/transaction/:id', TransactionConttroller.update);
 router.get('/place/:city_name', PlaceConttroller.viewsByCity);
 router.post('/login',passport.authenticate('local', { session: false }), (req, res) => {
