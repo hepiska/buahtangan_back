@@ -1,7 +1,13 @@
 const AWS = require('aws-sdk');
 const model = require('../models');
+const cron = require('node-cron');
 require('dotenv').config();
-/* The following example sends a formatted email: */
+
+const fs = require('fs');
+
+const longWeekendString = fs.readFileSync('./data/longweekend.json').toString();
+const longWeekendJson = JSON.parse(longWeekendString);
+
 AWS.config
 .update({
   accessKeyId: process.env.AWS_KEY_ID,
@@ -102,5 +108,46 @@ module.exports = {
       }
       return 'send email success'
     });
+  },
+  sendPromo: (recivedEmail) => {
+    let to = [recivedEmail];
+    const params = {
+      Source: 'buahtanganmail@gmail.com',
+      Destination: { ToAddresses: to },
+      Message: {
+        Subject: {
+          Charset: 'UTF-8',
+          Data: 'Sudah siap Buat Liburan'
+        },
+        Body: {
+          Html: {
+            Charset: "UTF-8",
+            Data: `<h2>Long weekend is comming <h2>
+                    <h4>halo sahabat buah tangan long weekend sebentar lagi
+                      pas jalan jalan yang dirumah nungguin loh jangan lupa bawain
+                      oleh-oleh ya belinya di buahtangan agar liburan kamu tidak terganggu
+                      <h4>`
+          }
+        }
+      }
+    };
+    longWeekendJson.forEach((date) => {
+      console.log(date);
+      cron.schedule(`8 8 ${date.date} ${date.month} *`, (err, res) => {
+        if (err) {
+        } else {
+          ses.sendEmail(params, (err, data) => {
+            if (err) {
+              // console.log(err);
+              return (err)
+            }
+            return 'send email success'
+          });
+        }
+
+      });
+
+    })
+
   }
 };

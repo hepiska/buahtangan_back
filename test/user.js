@@ -67,8 +67,42 @@ describe ('register login', () => {
   })
 })
 
+describe('login', () => {
+  it('success', (done) => {
+    chai.request(serverHost)
+    .post('/api/login')
+    .send({
+      username: 'hepiska',
+      password: 'hepiska'
+    })
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.have.property('token');
+      res.body.should.have.property('sentUser');
+      done()
+    })
+  })
+  it('wrong user', (done) => {
+    chai.request(serverHost)
+    .post('/api/login')
+    .send({
+      username: 'hepisa',
+      password: 'hepiska'
+    })
+    .end((err, res) => {
+      if (err) {
+        res.should.have.status(401);
+          done()
+
+      } else {
+        done()
+      }
+    })
+  })
+})
+
 describe('login fb', () => {
-  it('already have account', () => {
+  it('already have account', (done) => {
     chai.request(serverHost).post('/api/fblogin')
     .send({
       name: 'lalala',
@@ -83,14 +117,13 @@ describe('login fb', () => {
       } else {
         res.should.have.status(200);
         res.body.should.have.property('token');
-        res.body.should.have.property('sendUser');
+        res.body.should.have.property('sentUser');
         done()
       }
-      done();
     });
   });
 
-  it('dont have account', () => {
+  it('dont have account', (done) => {
     chai.request(serverHost).post('/api/fblogin')
     .send({
       name: 'sumarni',
@@ -105,10 +138,9 @@ describe('login fb', () => {
       } else {
         res.should.have.status(200);
         res.body.should.have.property('token');
-        res.body.should.have.property('sendUser');
+        res.body.should.have.property('sentUser');
         done();
       }
-      done();
     });
   })
 

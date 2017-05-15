@@ -53,7 +53,7 @@ router.get('/transaction', TransactionConttroller.views);
 router.post('/transactionUser', TransactionConttroller.viewBuyer);
 router.put('/transaction/:id', TransactionConttroller.update);
 router.get('/place/:city_name', PlaceConttroller.viewsByCity);
-router.post('/login',passport.authenticate('local', { session: false }), (req, res) => {
+router.post('/login', passport.authenticate('local', { session: false }), (req, res) => {
   const user = res.req.user;
   const token = jwt.sign({
     id: user.id,
