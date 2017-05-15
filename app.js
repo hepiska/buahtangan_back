@@ -5,8 +5,6 @@ const cors = require('cors');
 const api = require('./routers/api');
 
 const app = express();
-const serverio = require('http').Server(app);
-const io = require('socket.io')(serverio);
 
 app.use(bodyParser.json({limit:'50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
@@ -18,10 +16,11 @@ const server = app.listen(PORT, () => {
   console.log(`Server Jalan di port ${process.env.PORT}`);
 });
 
+const io = require('socket.io')(server);
 io.on('connection', (socket) => {
   socket.emit('from server', { massage: 'update' });
   socket.on('from client', () => {
-    socket.emit('from server', { message: 'update' });
+    socket.broadcast.emit('from server', 'update' );
   });
 });
 
