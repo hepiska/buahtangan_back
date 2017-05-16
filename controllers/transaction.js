@@ -5,7 +5,11 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
   views: (req, res) => {
-    model.Transaction.findAll({})
+    model.Transaction.findAll({
+      order: [
+        ['createdAt', 'DESC']
+      ]
+    })
     .then((data) => {
       res.send(data);
     });
