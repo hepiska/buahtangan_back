@@ -11,7 +11,7 @@ module.exports = {
       "ssl":{
        "require":true
        }
-}
+     }
   },
   "test": {
     "username": "jvwrmmzwcpqyrd",
@@ -23,6 +23,7 @@ module.exports = {
     "dialectOptions":{
       "ssl":{
        "require":true
+       }
      }
   },
   "production": {
