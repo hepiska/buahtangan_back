@@ -32,7 +32,6 @@ describe('checkout',() => {
         }).end((errcheckout, rescheckout) => {
           if (errcheckout) {
           } else {
-            console.log(rescheckout.body);
             rescheckout.body.should.have.property('massage');
             rescheckout.body.data.should.have.property('transaction_id')
           }

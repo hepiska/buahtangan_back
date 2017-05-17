@@ -22,7 +22,10 @@ module.exports = {
         const user = decoded;
         model.Transaction.findAll({
           where: {
-            user_id: user.id
+            user_id: user.id,
+            status: {
+              $notILike: '%delivery%'
+            }
           }
         }).then((data) => {
           res.send(data)

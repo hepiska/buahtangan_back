@@ -36,6 +36,7 @@ describe('Product', () => {
     });
   done()
   });
+
   it('update product', (done) => {
     chai.request(server)
     .put('/api/products/20')

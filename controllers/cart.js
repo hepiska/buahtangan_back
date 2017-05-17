@@ -14,21 +14,27 @@ module.exports = {
         const user = decoded;
         const transaction_id = generateID({ prefix: 'buahtangan-' })
         const items = req.body.cartItem;
-        items.forEach((item) => {
-          model.Cart.create({
-            user_id: user.id,
-            product_id: item.id,
-            transaction_id
+        if (item.length > 0) {
+          items.forEach((item) => {
+            model.Cart.create({
+              user_id: user.id,
+              product_id: item.id,
+              transaction_id
+            })
           })
-        })
-        model.Transaction.create({
-          user_id: user.id,
-          transaction_id,
-          status: 'unpaid'
-        }).then((data) => {
-          mail.sendTransactionSumaary(user.email, transaction_id)
-          res.send({ massage: 'checkout succses', data })
-        });
+          model.Transaction.create({
+            user_id: user.id,
+            transaction_id,
+            status: 'unpaid'
+          }).then((data) => {
+            mail.sendTransactionSumaary(user.email, transaction_id)
+            res.send({ massage: 'checkout succses', data })
+          });
+        } else {
+          res.send({massage:'cant checkout empety cart'})
+        }
+
+
       }
     });
   }
