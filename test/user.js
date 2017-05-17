@@ -44,12 +44,14 @@ describe ('register login', () => {
     })
     .end((err, res) => {
       if (err) {
+        console.log(err);
       } else {
         res.should.have.status(200);
-        res.body.massage.should.to.equal('register success')
+        console.log(res.body.massage);
+        res.body.massage.should.equal('register success')
       }
     });
-done()
+    done()
   });
 
   afterEach((done) => {
@@ -63,6 +65,7 @@ done()
     });
     done()
   })
+
 })
 
 describe('login', () => {
