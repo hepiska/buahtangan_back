@@ -26,7 +26,6 @@ describe('get data', (done) => {
       if (err) {
         err.should.not('undefined');
       } else {
-        console.log(res);
       }
     });
       done()
@@ -54,7 +53,6 @@ describe('get user transaction', () => {
       password: 'hepiska'
     }).end((err, res) => {
       if (err) {
-        console.log(err);
         done()
       } else {
         chai.request(server)
@@ -63,7 +61,6 @@ describe('get user transaction', () => {
           token: res.body.token
         }).end((errtran, restran) => {
           if (errtran) {
-            console.log(err);
           } else {
             restran.body[0].should.have.property('transaction_id');
             restran.body[0].should.have.property('user_id');

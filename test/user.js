@@ -43,7 +43,6 @@ describe ('register login', () => {
     .end((err, res) => {
       if (err) {
       } else {
-        console.log('------',res.body);
         res.should.have.status(200);
       }
     });
@@ -63,7 +62,6 @@ describe ('register login', () => {
     })
     .end((err, res) => {
       if (err) {
-        console.log(err);
       } else {
         res.should.have.status(200);
       }
@@ -116,6 +114,22 @@ describe('login', () => {
     })
     done()
   })
+
+  it('wrong user', (done) => {
+    chai.request(serverHost)
+    .post('/api/login')
+    .send({
+      username: 'hepiska',
+      password: 'hepisa'
+    })
+    .end((err, res) => {
+      if (err) {
+        res.should.have.status(401);
+      } else {
+      }
+    })
+    done()
+  })
 })
 
 describe('login fb', () => {
@@ -134,7 +148,6 @@ describe('login fb', () => {
         res.should.have.status(200);
         res.body.should.have.property('token');
         res.body.should.have.property('sentUser');
-
       }
     });
   done()

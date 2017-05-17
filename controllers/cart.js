@@ -20,8 +20,8 @@ module.exports = {
               user_id: user.id,
               product_id: item.id,
               transaction_id
-            })
-          })
+            });
+          });
           model.Transaction.create({
             user_id: user.id,
             transaction_id,

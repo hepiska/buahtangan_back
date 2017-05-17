@@ -41,7 +41,7 @@ describe('checkout', () => {
     done()
   });
 
-  it('empey cart', (done) => {
+  it('empety cart', (done) => {
     chai.request(server).post('/api/fblogin')
     .send({
       name: 'lalala',
@@ -54,7 +54,6 @@ describe('checkout', () => {
       if (err) {
       } else {
         let token = res.body.token
-        //console.log(token);
         chai.request(server).post('/api/checkout')
         .send({
           token,
