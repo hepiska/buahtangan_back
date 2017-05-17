@@ -17,7 +17,21 @@ describe('get data', (done) => {
     });
       done()
   });
-  it('success', (done) => {
+  it('get fail', (done) => {
+    chai.request(server)
+    .get('/api/Transaction/1')
+    .send({
+    })
+    .end((err, res) => {
+      if (err) {
+        err.should.not('undefined');
+      } else {
+        console.log(res);
+      }
+    });
+      done()
+  });
+  it(' edit success', (done) => {
     chai.request(server)
     .put('/api/Transaction/1')
     .send({
