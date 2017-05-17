@@ -14,7 +14,7 @@ module.exports = {
         const user = decoded;
         const transaction_id = generateID({ prefix: 'buahtangan-' })
         const items = req.body.cartItem;
-        if (item.length > 0) {
+        if (items.length > 0) {
           items.forEach((item) => {
             model.Cart.create({
               user_id: user.id,
