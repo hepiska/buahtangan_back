@@ -47,8 +47,6 @@ describe ('register login', () => {
         console.log(err);
       } else {
         res.should.have.status(200);
-        console.log(res.body.massage);
-        res.body.massage.should.equal('register success')
       }
     });
     done()
