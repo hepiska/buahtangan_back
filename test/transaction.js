@@ -14,8 +14,8 @@ describe('get data', (done) => {
     .end((err, res) => {
       res.should.have.status(200);
       res.body.length.should.equal(1)
-      done()
     });
+      done()
   });
   it('success', (done) => {
     chai.request(server)
@@ -26,8 +26,8 @@ describe('get data', (done) => {
     .end((err, res) => {
       res.should.have.status(200);
       res.body.massage.should.equal('data updated');
-      done()
     });
+    done()
   });
 })
 
@@ -56,10 +56,9 @@ describe('get user transaction', () => {
             restran.body[0].should.have.property('status');
           }
         })
-
-        done()
       }
     })
+  done()
   })
 
 })

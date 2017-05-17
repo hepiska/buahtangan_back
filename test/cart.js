@@ -22,28 +22,54 @@ describe('checkout',() => {
     })
     .end((err, res) => {
       if (err) {
-        done()
       } else {
         let token = res.body.token
+        //console.log(token);
         chai.request(server).post('/api/checkout')
         .send({
           token,
           cartItem
         }).end((errcheckout, rescheckout) => {
           if (errcheckout) {
-            done()
           } else {
             rescheckout.body.should.have.property('massage');
             rescheckout.body.data.should.have.property('transaction_id')
-            model.Cart.findAll({})
-            .then((data) => {
-              data.length.should.equal(3)
-            })
-            done()
           }
         })
       }
     });
+
+    done()
+  });
+
+  it('empey cart', (done) => {
+    chai.request(server).post('/api/fblogin')
+    .send({
+      name: 'lalala',
+      email: 'lalala@mail.com',
+      phone: '0092109209120129',
+      username: 'hepiska',
+      profil_picture_url: 'mantap'
+    })
+    .end((err, res) => {
+      if (err) {
+      } else {
+        let token = res.body.token
+        //console.log(token);
+        chai.request(server).post('/api/checkout')
+        .send({
+          token,
+          cartItem:[]
+        }).end((errcheckout, rescheckout) => {
+          if (errcheckout) {
+          } else {
+            rescheckout.body.should.have.property('massage');
+            rescheckout.body.massage.should.equal('cant checkout empety cart')
+          }
+        })
+      }
+    });
+    done()
   });
 
   it('no token ', (done) => {
@@ -89,8 +115,8 @@ describe('checkout',() => {
           }
         }
       }).then(() => {
-        done()
       })
     });
+    done()
   });
 });

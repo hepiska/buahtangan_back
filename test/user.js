@@ -22,13 +22,12 @@ describe ('register login', () => {
     })
     .end((err, res) => {
       if (err) {
-        done(err)
       } else {
         res.should.have.status(200);
         res.body.message.should.to.equal('Validation error: already taken')
-        done()
       }
     });
+    done()
   });
 
 
@@ -45,13 +44,12 @@ describe ('register login', () => {
     })
     .end((err, res) => {
       if (err) {
-        done(err)
+        console.log(err);
       } else {
         res.should.have.status(200);
-        res.body.massage.should.to.equal('register success')
-        done()
       }
     });
+    done()
   });
 
   afterEach((done) => {
@@ -62,9 +60,10 @@ describe ('register login', () => {
         }
       }
     }).then(() => {
-      done()
     });
+    done()
   })
+
 })
 
 describe('login', () => {
@@ -79,8 +78,8 @@ describe('login', () => {
       res.should.have.status(200);
       res.body.should.have.property('token');
       res.body.should.have.property('sentUser');
-      done()
     })
+    done()
   })
   it('wrong user', (done) => {
     chai.request(serverHost)
@@ -92,12 +91,11 @@ describe('login', () => {
     .end((err, res) => {
       if (err) {
         res.should.have.status(401);
-          done()
 
       } else {
-        done()
       }
     })
+    done()
   })
 })
 
@@ -113,14 +111,14 @@ describe('login fb', () => {
     })
     .end((err, res) => {
       if (err) {
-        done(err)
       } else {
         res.should.have.status(200);
         res.body.should.have.property('token');
         res.body.should.have.property('sentUser');
-        done()
+
       }
     });
+  done()
   });
 
   it('dont have account', (done) => {
@@ -139,9 +137,9 @@ describe('login fb', () => {
         res.should.have.status(200);
         res.body.should.have.property('token');
         res.body.should.have.property('sentUser');
-        done();
       }
     });
+    done();
   })
 
 })
