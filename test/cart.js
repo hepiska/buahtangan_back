@@ -22,7 +22,6 @@ describe('checkout',() => {
     })
     .end((err, res) => {
       if (err) {
-        done()
       } else {
         let token = res.body.token
         //console.log(token);
@@ -32,12 +31,10 @@ describe('checkout',() => {
           cartItem
         }).end((errcheckout, rescheckout) => {
           if (errcheckout) {
-            done()
           } else {
             console.log(rescheckout.body);
             rescheckout.body.should.have.property('massage');
             rescheckout.body.data.should.have.property('transaction_id')
-            done()
           }
         })
       }

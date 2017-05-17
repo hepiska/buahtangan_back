@@ -20,11 +20,12 @@ describe('Product', () => {
       category: 'food',
       city: 'jakarta',
     })
-    .end((err,res) => {
+    .end((err, res) => {
       res.should.have.status(200);
     });
-done()
+   done()
   });
+
   it('delete product', (done) => {
     chai.request(server)
     .delete('/api/products/113')
