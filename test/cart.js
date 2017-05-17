@@ -25,6 +25,7 @@ describe('checkout',() => {
         done()
       } else {
         let token = res.body.token
+        //console.log(token);
         chai.request(server).post('/api/checkout')
         .send({
           token,
@@ -33,17 +34,16 @@ describe('checkout',() => {
           if (errcheckout) {
             done()
           } else {
+            console.log(rescheckout.body);
             rescheckout.body.should.have.property('massage');
             rescheckout.body.data.should.have.property('transaction_id')
-            model.Cart.findAll({})
-            .then((data) => {
-              data.length.should.equal(3)
-            })
             done()
           }
         })
       }
     });
+
+    done()
   });
 
   it('no token ', (done) => {
@@ -89,8 +89,8 @@ describe('checkout',() => {
           }
         }
       }).then(() => {
-        done()
       })
     });
+    done()
   });
 });
