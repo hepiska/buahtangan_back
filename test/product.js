@@ -20,11 +20,12 @@ describe('Product', () => {
       category: 'food',
       city: 'jakarta',
     })
-    .end((err,res) => {
+    .end((err, res) => {
       res.should.have.status(200);
-      done()
     });
+   done()
   });
+
   it('delete product', (done) => {
     chai.request(server)
     .delete('/api/products/113')
@@ -32,9 +33,10 @@ describe('Product', () => {
     })
     .end((err, res) => {
       res.should.have.status(200);
-      done()
     });
+  done()
   });
+
   it('update product', (done) => {
     chai.request(server)
     .put('/api/products/20')
@@ -44,8 +46,8 @@ describe('Product', () => {
     .end((err, res) => {
       res.should.have.status(200);
        res.body.massage.should.to.equal('data updated');
-      done()
     });
+    done()
   });
   it('get product', (done) => {
     chai.request(server)
@@ -58,8 +60,8 @@ describe('Product', () => {
       res.body[0].should.have.property('name');
       res.body[0].should.have.property('price');
       res.body[0].should.have.property('city_name');
-      done()
     });
+    done()
   });
   it('get product fail', (done) => {
     chai.request(server)
@@ -68,8 +70,9 @@ describe('Product', () => {
     })
     .end((err, res) => {
       res.body.length.should.equal(0)
-      done()
+
     });
+    done()
   });
 
   afterEach((done) => {
@@ -109,8 +112,8 @@ describe('featured product', () => {
       res.body[0].should.have.property('name')
       res.body[0].should.have.property('price')
       res.body[0].should.have.property('image_url')
-      done()
     });
+    done()
   });
   it('succes get ', (done) => {
     chai.request(server)
@@ -120,8 +123,8 @@ describe('featured product', () => {
     .end((err, res) => {
       res.should.have.status(200);
       res.body.length.should.equal(0)
-      done()
     });
+    done()
   })
   it('succes wronng url ', (done) => {
     chai.request(server)
@@ -130,7 +133,7 @@ describe('featured product', () => {
     })
     .end((err, res) => {
       res.should.have.status(404);
-      done()
     });
+    done()
   })
 })
