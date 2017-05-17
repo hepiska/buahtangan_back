@@ -30,6 +30,25 @@ describe ('register login', () => {
     done()
   });
 
+  it('failed without username', (done) => {
+    chai.request(serverHost).post('/api/register')
+    .send({
+      name: 'lalala',
+      email: 'lalala@mail.com',
+      phone: '0092109209120129',
+      password: 'sumarno',
+      role: 'user',
+      profil_picture_url: 'mantap'
+    })
+    .end((err, res) => {
+      if (err) {
+      } else {
+        console.log('------',res.body);
+        res.should.have.status(200);
+      }
+    });
+    done()
+  });
 
   it('should have succes', (done) => {
     chai.request(serverHost).post('/api/register')

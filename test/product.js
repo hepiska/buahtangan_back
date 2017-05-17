@@ -23,6 +23,7 @@ describe('Product', () => {
     .end((err, res) => {
       res.should.have.status(200);
     });
+
    done()
   });
 

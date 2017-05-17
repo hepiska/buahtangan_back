@@ -5,7 +5,7 @@ const model = require('../models');
 const chaiHttp = require('chai-http');
 const server = require('../app.js').server;
 
-describe('checkout',() => {
+describe('checkout', () => {
   const cartItem = [
     { id: 1, name: 'bakpau' },
     { id: 2, name: 'bakpia' },
@@ -24,7 +24,6 @@ describe('checkout',() => {
       if (err) {
       } else {
         let token = res.body.token
-        //console.log(token);
         chai.request(server).post('/api/checkout')
         .send({
           token,
