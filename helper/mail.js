@@ -1,6 +1,6 @@
 const AWS = require('aws-sdk');
 const model = require('../models');
-const cron = require('node-cron');
+const cron = require('cron').CronJob;
 require('dotenv').config();
 
 const fs = require('fs');
@@ -133,7 +133,7 @@ module.exports = {
     };
     longWeekendJson.forEach((date) => {
       console.log(date);
-      cron.schedule(`${date.minute} ${date.hour} ${date.date} ${date.month} *`, (err, res) => {
+      new cron(`0 ${date.minute} ${date.hour} ${date.date} ${date.month} *`, (err, res) => {
         if (err) {
         } else {
           ses.sendEmail(params, (err, data) => {
@@ -145,7 +145,7 @@ module.exports = {
           });
         }
 
-      });
+      },null, true, 'Asia/Jakarta');
 
     })
 
