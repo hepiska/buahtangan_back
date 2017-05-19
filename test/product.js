@@ -18,7 +18,7 @@ describe('Product', () => {
       price: '20000',
       featured: true,
       category: 'food',
-      city: 'jakarta',
+      city:'' 'jakarta',
     })
     .end((err, res) => {
       res.should.have.status(200);

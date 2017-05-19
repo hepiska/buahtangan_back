@@ -18,7 +18,6 @@ const server = app.listen(PORT, () => {
 
 const io = require('socket.io')(server);
 io.on('connection', (socket) => {
-  socket.emit('from server', { massage: 'update' });
   socket.on('from client', () => {
     socket.broadcast.emit('from server', 'update' );
   });
