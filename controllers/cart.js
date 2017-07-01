@@ -25,6 +25,8 @@ module.exports = {
           model.Transaction.create({
             user_id: user.id,
             transaction_id,
+            send_date:req.body.send_date,
+            location_id:req.body.location_id,
             status: 'unpaid'
           }).then((data) => {
             mail.sendTransactionSumaary(user.email, transaction_id)
@@ -33,7 +35,6 @@ module.exports = {
         } else {
           res.send({massage:'cant checkout empety cart'})
         }
-
 
       }
     });
