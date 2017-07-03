@@ -23,6 +23,7 @@ describe('Product', () => {
     .end((err, res) => {
       res.should.have.status(200);
     });
+
    done()
   });
 
@@ -63,6 +64,53 @@ describe('Product', () => {
     });
     done()
   });
+
+  it('get product without city params', (done) => {
+    chai.request(server)
+    .get('/api/products//food')
+    .send({
+    })
+    .end((err, res) => {
+      res.should.have.status(404);
+    });
+    done()
+  });
+
+  it('get product without city params', (done) => {
+    chai.request(server)
+    .get('/api/products/jakarta/')
+    .send({
+    })
+    .end((err, res) => {
+      res.should.have.status(404);
+    });
+    done()
+  });
+
+  it('get product unavailable city name', (done) => {
+    chai.request(server)
+    .get('/api/products/bandung/food')
+    .send({
+    })
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.body.length.should.equal(0);
+    });
+    done()
+  });
+
+  it('get product unavailable product category', (done) => {
+    chai.request(server)
+    .get('/api/products/bandung/boneka')
+    .send({
+    })
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.body.length.should.equal(0);
+    });
+    done()
+  });
+
   it('get product fail', (done) => {
     chai.request(server)
     .get('/api/products/jakarta/acces')
@@ -70,7 +118,6 @@ describe('Product', () => {
     })
     .end((err, res) => {
       res.body.length.should.equal(0)
-
     });
     done()
   });

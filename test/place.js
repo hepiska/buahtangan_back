@@ -34,7 +34,7 @@ describe('get place', () => {
     })
     done()
   });
-  it('wrong city', (done) => {
+  it('unavailiable city city', (done) => {
     chai.request(server)
     .get('/api/place/bandung')
     .send({})
