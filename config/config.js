@@ -22,11 +22,11 @@ module.exports = {
      }
   },
   "production": {
-    "username": process.env.RDS_USERNAME || '',
-    "password": process.env.RDS_PASSWORD || '',
-    "database": process.env.RDS_DB_NAME || '',
-    "host": process.env.RDS_HOSTNAME || '',
-    "port": process.env.RDS_PORT || '5432',
+    "username": process.env.DO_USERNAME || '',
+    "password": process.env.DO_PASSWORD || '',
+    "database": process.env.DATABASE || '',
+    "host": process.env.HOST || '',
+    "port": process.env.PORT || '5432',
     "dialect": "postgres",
     "logging":false
   }

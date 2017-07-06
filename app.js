@@ -13,7 +13,7 @@ app.use('/api', api);
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
-  console.log(`Server Jalan di port ${process.env.PORT}`);
+  console.log(`Server Jalan di port ${PORT}`);
 });
 
 const io = require('socket.io')(server);
